@@ -1,57 +1,146 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(SphereCollider))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    [Header("Movement")]
+    public float moveSpeed = 6f;
+
+    [Header("Jump")]
     public float jumpForce = 7f;
+
+    [Header("Camera")]
+    public Transform cameraTransform;
+
+    [Header("Ground Check")]
+    public LayerMask groundLayer;
+    public Vector3 groundCheckOffset = new Vector3(0f, -0.7f, 0f);
+    public float groundCheckRadius = 0.35f;
 
     private Rigidbody rb;
     private Vector2 moveInput;
-    private bool jumpPressed;
 
-    void Awake()
+    public bool IsGrounded { get; private set; }
+
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    private void Update()
     {
+        // -------------------------
+        // INPUT
+        // -------------------------
+
         moveInput = Vector2.zero;
 
         if (Keyboard.current != null)
         {
-            moveInput = new Vector2(
-                (Keyboard.current.dKey.isPressed ? 1 : 0) -
-                (Keyboard.current.aKey.isPressed ? 1 : 0),
+            if (Keyboard.current.wKey.isPressed)
+                moveInput.y += 1f;
 
-                (Keyboard.current.wKey.isPressed ? 1 : 0) -
-                (Keyboard.current.sKey.isPressed ? 1 : 0)
-            );
+            if (Keyboard.current.sKey.isPressed)
+                moveInput.y -= 1f;
 
+            if (Keyboard.current.aKey.isPressed)
+                moveInput.x -= 1f;
+
+            if (Keyboard.current.dKey.isPressed)
+                moveInput.x += 1f;
+
+            // Jump
             if (Keyboard.current.spaceKey.wasPressedThisFrame)
             {
-                jumpPressed = true;
+                CheckGround();
+
+                if (IsGrounded)
+                    Jump();
             }
         }
+
+        // Ground check ONLY determines IsGrounded
+        CheckGround();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        // Movement
-        Vector3 movement = new Vector3(moveInput.x, 0f, moveInput.y);
+        Move();
+    }
 
-        rb.linearVelocity = new Vector3(
-            movement.x * moveSpeed,
-            rb.linearVelocity.y,
-            movement.z * moveSpeed
+    private void Move()
+    {
+        if (cameraTransform == null)
+            return;
+
+        // Camera forward/right
+        Vector3 forward = cameraTransform.forward;
+        Vector3 right = cameraTransform.right;
+
+        // Remove vertical camera angle
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
+
+        // Camera-relative movement
+        Vector3 movement =
+            forward * moveInput.y +
+            right * moveInput.x;
+
+        movement = Vector3.ClampMagnitude(movement, 1f);
+
+        // ONLY change horizontal velocity
+        Vector3 velocity = rb.linearVelocity;
+
+        velocity.x = movement.x * moveSpeed;
+        velocity.z = movement.z * moveSpeed;
+
+        rb.linearVelocity = velocity;
+    }
+
+    private void Jump()
+    {
+        Vector3 velocity = rb.linearVelocity;
+
+        // Remove downward velocity
+        velocity.y = 0f;
+        rb.linearVelocity = velocity;
+
+        rb.AddForce(
+            Vector3.up * jumpForce,
+            ForceMode.Impulse
         );
+    }
 
-        // Jump
-        if (jumpPressed)
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            jumpPressed = false;
-        }
+    private void CheckGround()
+    {
+        Vector3 checkPosition =
+            transform.position + groundCheckOffset;
+
+        IsGrounded = Physics.CheckSphere(
+            checkPosition,
+            groundCheckRadius,
+            groundLayer,
+            QueryTriggerInteraction.Ignore
+        );
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Vector3 checkPosition =
+            transform.position + groundCheckOffset;
+
+        Gizmos.color = IsGrounded
+            ? Color.green
+            : Color.red;
+
+        Gizmos.DrawWireSphere(
+            checkPosition,
+            groundCheckRadius
+        );
     }
 }
