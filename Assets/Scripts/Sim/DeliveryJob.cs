@@ -20,9 +20,9 @@ public class DeliveryJob : Job
     public float arriveDistance = 2.5f;
 
     [Header("Pay")]
-    public int basePay = 10;
+    public int basePay = 15;
     // Extra money for every 10 meters between the depot and the drop-off
-    public int payPer10Meters = 3;
+    public int payPer10Meters = 4;
 
     private Transform target;
     private int currentPay;

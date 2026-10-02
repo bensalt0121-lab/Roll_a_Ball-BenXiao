@@ -47,6 +47,7 @@ namespace IAmABall.EditorTools
         // Medium-size player: about waist height of a person
         const float PlayerScale = 0.5f;
         const float PlayerSpeed = 3.2f;
+        const int StartingMoney = 40;
 
         static readonly string[] CivilianModels =
         {
@@ -155,6 +156,14 @@ namespace IAmABall.EditorTools
                 cameraSettings.FindProperty("distance").floatValue = 2.6f;
                 cameraSettings.FindProperty("height").floatValue = 0.6f;
                 cameraSettings.ApplyModifiedProperties();
+            }
+
+            // Start with a little money so the player can buy food right away
+            MoneyManager wallet = Object.FindAnyObjectByType<MoneyManager>();
+            if (wallet != null && wallet.currentMoney < StartingMoney)
+            {
+                Undo.RecordObject(wallet, "Starting money");
+                wallet.currentMoney = StartingMoney;
             }
 
             GetOrAdd<PlayerNeeds>(player);

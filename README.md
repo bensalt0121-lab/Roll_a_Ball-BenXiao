@@ -16,6 +16,12 @@ Made by Ben Xiao, with help from Claude (AI coding assistant).
 | E | Use things: buy food, start or finish a job, buy a house, sleep, climb into the sewer |
 | Left click | Shoot (after buying a pistol) / lock the mouse |
 | Esc | Free the mouse |
+| H | Help screen (controls, goal, map colors). R in the help screen replays the tutorial |
+| T | Skip the tutorial |
+| Enter | Next tutorial tip |
+
+A short **tutorial** starts the first time you play: move, jump, buy food, do a job, then the
+goal and the police. A blue beam shows where to go. You start with $40.
 
 - **Hunger and thirst** go down slowly (about 7-8 minutes). Buy food and drinks at the Burger
   Shop, Drink Bar or Corner Store. If a bar is empty you roll slower.
@@ -27,8 +33,9 @@ Made by Ben Xiao, with help from Claude (AI coding assistant).
   - *Street Performer* (Food Court stage): jump around on the stage for 30 seconds; people come to watch.
 - **Homes:** you start with the Starter Apartment (press E at the door to sleep until morning).
   Buy the House on Oak Street ($300), then the Dream Villa ($800) to win.
-- **Police:** knocking people over or shooting makes you wanted (stars, top right). Officers
-  chase you on foot; at 3 stars police cars join in. If they catch you, you pay a fine.
+- **Police:** bumping into people is fine, but jumping into people or shooting makes you wanted
+  (stars, top right). Officers chase you on foot; at 4 stars police cars join in. Get far away
+  and they give up. If they catch you, you pay a fine.
   Stars go away if you stay out of trouble.
 - **Hospital:** if a car hits you, you wake up at the hospital and pay a bill.
 - **Black market:** hidden under the sewer entrance at the south-east corner of the city.

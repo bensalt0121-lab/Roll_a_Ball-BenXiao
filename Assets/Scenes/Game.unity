@@ -5480,7 +5480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -7065,7 +7065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -10232,7 +10232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -20972,8 +20972,8 @@ MonoBehaviour:
   - {fileID: 1217393674}
   marker: {fileID: 216602753}
   arriveDistance: 2.5
-  basePay: 10
-  payPer10Meters: 3
+  basePay: 15
+  payPer10Meters: 4
 --- !u!1001 &284112641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27952,7 +27952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -34313,7 +34313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -56002,7 +56002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -63191,8 +63191,8 @@ MonoBehaviour:
   bagsPerShift: 6
   pickUpDistance: 1.3
   pickUpSound: {fileID: 8300000, guid: da09e843422d65248a3918bc76fd6d7c, type: 3}
-  payPerBag: 4
-  finishBonus: 6
+  payPerBag: 5
+  finishBonus: 10
 --- !u!1 &818523533
 GameObject:
   m_ObjectHideFlags: 0
@@ -63730,8 +63730,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd567cba74db8847a776d99a7670506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PoliceCar
-  starsToChase: 3
-  chaseSpeed: 6
+  starsToChase: 4
+  chaseSpeed: 5
   returnSpeed: 4
   catchDistance: 2.4
   repathTime: 0.5
@@ -67851,7 +67851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06765f54962fe247adcb5d2ede34dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PoliceOfficer
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 2
@@ -67859,9 +67859,9 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: 75482b963e80d1f43be4a6d3e1c2b717, type: 3}
   animator: {fileID: 74292280}
   patrolSpeed: 1.2
-  chaseSpeed: 1.9
-  chaseSpeedPerStar: 0.15
-  catchDistance: 1.1
+  chaseSpeed: 1.7
+  chaseSpeedPerStar: 0.1
+  catchDistance: 0.9
   repathTime: 0.4
 --- !u!114 &876274893
 MonoBehaviour:
@@ -76386,7 +76386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -93497,8 +93497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd567cba74db8847a776d99a7670506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PoliceCar
-  starsToChase: 3
-  chaseSpeed: 6
+  starsToChase: 4
+  chaseSpeed: 5
   returnSpeed: 4
   catchDistance: 2.4
   repathTime: 0.5
@@ -101501,7 +101501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -104381,7 +104381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86303918f01d364cbcfff55eb233d7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScriptedWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -104681,9 +104681,9 @@ MonoBehaviour:
   stageRadius: 3.5
   watchRadius: 15
   trickSound: {fileID: 8300000, guid: 2720e30d72629504083c34bac4e8e8d0, type: 3}
-  payPerTrick: 1
-  maxTrickPay: 20
-  payPerWatcher: 2
+  payPerTrick: 2
+  maxTrickPay: 30
+  payPerWatcher: 3
 --- !u!1 &1329855188
 GameObject:
   m_ObjectHideFlags: 0
@@ -109951,7 +109951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -110483,7 +110483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -111092,9 +111092,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WantedLevel
   maxStars: 5
-  secondsToLoseStar: 20
-  finePercent: 0.25
-  minimumFine: 10
+  secondsToLoseStar: 12
+  finePercent: 0.15
+  minimumFine: 5
   releasePoint: {fileID: 1078942850}
   crimeSound: {fileID: 8300000, guid: 3257f404473c0cc498b476354a3c92db, type: 3}
   bustedSound: {fileID: 8300000, guid: eb3ab6bf565caf446b3db5881a5267e7, type: 3}
@@ -115800,7 +115800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -116312,7 +116312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -120906,7 +120906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -125309,7 +125309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06765f54962fe247adcb5d2ede34dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PoliceOfficer
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 2
@@ -125317,9 +125317,9 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: 75482b963e80d1f43be4a6d3e1c2b717, type: 3}
   animator: {fileID: 20178221}
   patrolSpeed: 1.2
-  chaseSpeed: 1.9
-  chaseSpeedPerStar: 0.15
-  catchDistance: 1.1
+  chaseSpeed: 1.7
+  chaseSpeedPerStar: 0.1
+  catchDistance: 0.9
   repathTime: 0.4
 --- !u!114 &1630440668
 MonoBehaviour:
@@ -127048,8 +127048,8 @@ MonoBehaviour:
   arriveDistance: 3
   loseDistance: 25
   minimumTripLength: 20
-  basePay: 12
-  payPer10Meters: 3
+  basePay: 15
+  payPer10Meters: 4
 --- !u!1001 &1659803449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -135585,7 +135585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -136214,7 +136214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -141559,7 +141559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 780b2a1faed474f4fbddae10acb386e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoneyManager
-  currentMoney: 0
+  currentMoney: 40
   moneyText: {fileID: 952924492}
 --- !u!4 &1835172907
 Transform:
@@ -147487,7 +147487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86303918f01d364cbcfff55eb233d7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScriptedWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -151327,7 +151327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -152810,7 +152810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -155792,7 +155792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -156297,7 +156297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -156555,8 +156555,8 @@ MonoBehaviour:
   timeBetweenCustomers: 2
   maxAwayDistance: 7
   serveSound: {fileID: 8300000, guid: 233341b236c76f54c81ae337e8120083, type: 3}
-  payPerCustomer: 3
-  shiftBonus: 5
+  payPerCustomer: 4
+  shiftBonus: 8
 --- !u!1 &2032553751
 GameObject:
   m_ObjectHideFlags: 0
@@ -165290,7 +165290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f26cac6e67a004c8d0ed6f3e2261bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcWalker
-  knockOverSpeed: 1.2
+  knockOverSpeed: 3.5
   knockForce: 3
   getUpTime: 4
   crimeStars: 1
@@ -165504,8 +165504,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hospital
   releasePoint: {fileID: 2012529720}
-  billPercent: 0.15
-  minimumBill: 20
+  billPercent: 0.1
+  minimumBill: 10
   refillTo: 50
   sound: {fileID: 8300000, guid: 9dab72d675d3a43449fa349c500e5483, type: 3}
 --- !u!1 &2130697131 stripped

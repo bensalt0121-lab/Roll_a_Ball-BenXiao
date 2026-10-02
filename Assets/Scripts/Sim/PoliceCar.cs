@@ -3,11 +3,12 @@
  * REQUIRED DEPENDENCIES: NavMeshAgent on the same object, a NavMesh (RuntimeNavMesh),
  *                        WantedLevel, siren lights, siren sound in
  *                        Assets/Resources/Audio/Cars/Siren
- * DESCRIPTION: Stays parked until the player has 3 or more wanted stars, then turns on its
+ * DESCRIPTION: Stays parked until the player has 4 or more wanted stars, then turns on its
  *              siren and chases the player. Gets close enough and the player is busted.
  *              Drives back to its parking spot when the stars go down.
  * AUTHOR: Ben Xiao (written with Claude)
- * VERSION: 1.0
+ * VERSION: 1.1
+ * VERSION 1.1: Easier: only chases at 4 or more stars, a little slower.
  *********************************************************************************************/
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,8 +17,8 @@ using UnityEngine.AI;
 public class PoliceCar : MonoBehaviour
 {
     [Header("Chasing")]
-    public int starsToChase = 3;
-    public float chaseSpeed = 6f;
+    public int starsToChase = 4;
+    public float chaseSpeed = 5f;
     public float returnSpeed = 4f;
     // How close the car must get to bust the player
     public float catchDistance = 2.4f;

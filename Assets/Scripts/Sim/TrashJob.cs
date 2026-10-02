@@ -22,8 +22,8 @@ public class TrashJob : Job
     public AudioClip pickUpSound;
 
     [Header("Pay")]
-    public int payPerBag = 4;
-    public int finishBonus = 6;
+    public int payPerBag = 5;
+    public int finishBonus = 10;
 
     private readonly List<GameObject> bags = new List<GameObject>();
     private int collected;

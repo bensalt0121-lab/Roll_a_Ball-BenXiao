@@ -7,8 +7,10 @@
  *              walk/idle animations, and falling over (with real physics) when the player
  *              rolls into them fast, which also makes the player wanted.
  * AUTHOR: Ben Xiao (written with Claude)
- * VERSION: 1.1
+ * VERSION: 1.2
  * VERSION 1.1: KnockOver is public so the pistol can knock people over too.
+ * VERSION 1.2: Normal rolling only bumps people; you have to jump into them (or go
+ *              faster than 3.5 m/s) to knock them over.
  *********************************************************************************************/
 using UnityEngine;
 using UnityEngine.AI;
@@ -18,8 +20,9 @@ using UnityEngine.AI;
 public abstract class CityPerson : MonoBehaviour
 {
     [Header("Getting Knocked Over")]
-    // How fast the player must be rolling to knock this person over
-    public float knockOverSpeed = 1.2f;
+    // How fast the player must hit this person to knock them over. Rolling is about 3.2 m/s,
+    // so a normal bump is fine; jumping into someone is faster and knocks them over.
+    public float knockOverSpeed = 3.5f;
     // How hard the person is pushed when hit
     public float knockForce = 3f;
     // Seconds before the person gets back up

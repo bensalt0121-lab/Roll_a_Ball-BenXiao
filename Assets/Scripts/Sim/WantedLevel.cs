@@ -6,7 +6,8 @@
  *              Stars go away slowly if the player stays out of trouble. If the police catch
  *              the player, they pay a fine and are sent to the police station.
  * AUTHOR: Ben Xiao (written with Claude)
- * VERSION: 1.0
+ * VERSION: 1.1
+ * VERSION 1.1: Easier: stars go away faster and fines are smaller.
  *********************************************************************************************/
 using UnityEngine;
 
@@ -18,12 +19,12 @@ public class WantedLevel : MonoBehaviour
     [Header("Stars")]
     public int maxStars = 5;
     // Seconds without a new crime before one star goes away
-    public float secondsToLoseStar = 20f;
+    public float secondsToLoseStar = 12f;
 
     [Header("Getting Busted")]
     // Part of the player's money taken as a fine (0.25 = 25%)
-    public float finePercent = 0.25f;
-    public int minimumFine = 10;
+    public float finePercent = 0.15f;
+    public int minimumFine = 5;
     // Where the player is sent after being busted
     public Transform releasePoint;
 

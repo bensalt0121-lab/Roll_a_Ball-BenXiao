@@ -21,9 +21,9 @@ public class PerformerJob : Job
     public AudioClip trickSound;
 
     [Header("Pay")]
-    public int payPerTrick = 1;
-    public int maxTrickPay = 20;
-    public int payPerWatcher = 2;
+    public int payPerTrick = 2;
+    public int maxTrickPay = 30;
+    public int payPerWatcher = 3;
 
     private float endTime;
     private int tricks;

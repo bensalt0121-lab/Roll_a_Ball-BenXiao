@@ -5,9 +5,11 @@
  * DESCRIPTION: Finds the closest thing the player can use, shows "Press E ..." on screen,
  *              and uses it when the player presses E.
  * AUTHOR: Ben Xiao (written with Claude)
- * VERSION: 1.0
+ * VERSION: 1.1
+ * VERSION 1.1: People walk around the player (NavMeshObstacle) instead of into them.
  *********************************************************************************************/
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class PlayerInteractor : MonoBehaviour
@@ -26,6 +28,23 @@ public class PlayerInteractor : MonoBehaviour
     {
         Needs = GetComponent<PlayerNeeds>();
         Money = FindAnyObjectByType<MoneyManager>();
+        LetPeopleWalkAround();
+    }
+
+    // Tells the NPCs to step around the player like they step around each other
+    void LetPeopleWalkAround()
+    {
+        if (GetComponent<NavMeshObstacle>() != null)
+            return;
+
+        SphereCollider ball = GetComponent<SphereCollider>();
+        float radius = ball != null ? ball.radius : 0.5f;
+
+        NavMeshObstacle obstacle = gameObject.AddComponent<NavMeshObstacle>();
+        obstacle.shape = NavMeshObstacleShape.Capsule;
+        obstacle.radius = radius;
+        obstacle.height = radius * 2f;
+        obstacle.carving = false;
     }
 
     void Update()

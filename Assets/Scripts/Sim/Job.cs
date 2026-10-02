@@ -4,12 +4,16 @@
  * DESCRIPTION: Everything every job shares: only one job can run at a time, the prompt
  *              shown at the job spot, starting the job with E, and getting paid at the end.
  * AUTHOR: Ben Xiao (written with Claude)
- * VERSION: 1.0
+ * VERSION: 1.1
+ * VERSION 1.1: Tells the tutorial when a job is finished (Finished event).
  *********************************************************************************************/
 using UnityEngine;
 
 public abstract class Job : Interactable
 {
+    // Other scripts (like the tutorial) can listen for finished jobs and the pay
+    public static event System.Action<Job, int> Finished;
+
     // The job the player is doing right now (null = no job)
     public static Job Active { get; private set; }
 
@@ -89,5 +93,6 @@ public abstract class Job : Interactable
         GameHUD.ClearObjective();
         Active = null;
         Worker = null;
+        Finished?.Invoke(this, pay);
     }
 }

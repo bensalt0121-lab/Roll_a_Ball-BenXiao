@@ -4,12 +4,16 @@
  * DESCRIPTION: A counter that sells one food or drink. Pressing E pays the price and fills
  *              the hunger and/or thirst bar.
  * AUTHOR: Ben Xiao (written with Claude)
- * VERSION: 1.0
+ * VERSION: 1.1
+ * VERSION 1.1: Tells the tutorial when something is bought (Purchased event).
  *********************************************************************************************/
 using UnityEngine;
 
 public class Shop : Interactable
 {
+    // Other scripts (like the tutorial) can listen for purchases
+    public static event System.Action<Shop> Purchased;
+
     [Header("Item For Sale")]
     public string itemName = "Burger";
     public int price = 8;
@@ -54,5 +58,6 @@ public class Shop : Interactable
 
         player.PlaySound(buySound);
         GameHUD.Say("You bought " + itemName + "!");
+        Purchased?.Invoke(this);
     }
 }

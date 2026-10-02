@@ -25,8 +25,8 @@ public class RideJob : Job
     public float minimumTripLength = 20f;
 
     [Header("Pay")]
-    public int basePay = 12;
-    public int payPer10Meters = 3;
+    public int basePay = 15;
+    public int payPer10Meters = 4;
 
     private Transform target;
     private int pay;

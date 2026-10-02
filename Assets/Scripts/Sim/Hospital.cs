@@ -18,8 +18,8 @@ public class Hospital : MonoBehaviour
 
     [Header("Bill")]
     // Part of the player's money the bill costs (0.15 = 15%), but at least minimumBill
-    public float billPercent = 0.15f;
-    public int minimumBill = 20;
+    public float billPercent = 0.1f;
+    public int minimumBill = 10;
 
     [Header("Care")]
     // The hospital fills hunger and thirst up to at least this much (out of 100)

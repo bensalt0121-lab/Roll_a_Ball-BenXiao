@@ -25,8 +25,8 @@ public class ClerkJob : Job
     public AudioClip serveSound;
 
     [Header("Pay")]
-    public int payPerCustomer = 3;
-    public int shiftBonus = 5;
+    public int payPerCustomer = 4;
+    public int shiftBonus = 8;
 
     private int served;
     private bool customerWaiting;
