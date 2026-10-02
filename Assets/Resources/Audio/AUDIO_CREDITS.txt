@@ -1,0 +1,132 @@
+AUDIO CREDITS
+=============
+All files were downloaded without any login/account. Each license below was
+checked on the file's own page (the URL listed under "License page").
+CC0 = public domain dedication, no attribution required (credit given anyway).
+CC BY = attribution REQUIRED: put the "Attribution line" in your game credits.
+
+----------------------------------------------------------------------------
+MUSIC
+----------------------------------------------------------------------------
+
+[1] Music\City\Easy_Lemon_KevinMacLeod.mp3
+    Title:        Easy Lemon
+    Author:       Kevin MacLeod (incompetech.com)
+    License:      CC BY 4.0  (https://creativecommons.org/licenses/by/4.0/)
+    License page: https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1200076
+    Download:     https://incompetech.com/music/royalty-free/mp3-royaltyfree/Easy%20Lemon.mp3
+    Attribution line:
+      "Easy Lemon" Kevin MacLeod (incompetech.com)
+      Licensed under Creative Commons: By Attribution 4.0 License
+      http://creativecommons.org/licenses/by/4.0/
+
+[2] Music\City\Monkeys_Spinning_Monkeys_KevinMacLeod.mp3
+    Title:        Monkeys Spinning Monkeys
+    Author:       Kevin MacLeod (incompetech.com)
+    License:      CC BY 4.0  (https://creativecommons.org/licenses/by/4.0/)
+    License page: https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1400011
+    Download:     https://incompetech.com/music/royalty-free/mp3-royaltyfree/Monkeys%20Spinning%20Monkeys.mp3
+    Attribution line:
+      "Monkeys Spinning Monkeys" Kevin MacLeod (incompetech.com)
+      Licensed under Creative Commons: By Attribution 4.0 License
+      http://creativecommons.org/licenses/by/4.0/
+
+[3] Music\BlackMarket\Sneaky_Snitch_KevinMacLeod.mp3
+    Title:        Sneaky Snitch
+    Author:       Kevin MacLeod (incompetech.com)
+    License:      CC BY 4.0  (https://creativecommons.org/licenses/by/4.0/)
+    License page: https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100772
+    Download:     https://incompetech.com/music/royalty-free/mp3-royaltyfree/Sneaky%20Snitch.mp3
+    Attribution line:
+      "Sneaky Snitch" Kevin MacLeod (incompetech.com)
+      Licensed under Creative Commons: By Attribution 4.0 License
+      http://creativecommons.org/licenses/by/4.0/
+
+[4] Music\Wanted\Movement_Proposition_KevinMacLeod.mp3
+    Title:        Movement Proposition  ("Fight scenes and chase scenes")
+    Author:       Kevin MacLeod (incompetech.com)
+    License:      CC BY 4.0  (https://creativecommons.org/licenses/by/4.0/)
+    License page: https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100778
+    Download:     https://incompetech.com/music/royalty-free/mp3-royaltyfree/Movement%20Proposition.mp3
+    Attribution line:
+      "Movement Proposition" Kevin MacLeod (incompetech.com)
+      Licensed under Creative Commons: By Attribution 4.0 License
+      http://creativecommons.org/licenses/by/4.0/
+
+----------------------------------------------------------------------------
+CARS
+----------------------------------------------------------------------------
+
+[5] Cars\Engine\car_engine_loop_1_GGBotNet.ogg
+    Title:        car_engine_loop_1.ogg, from "Car Sound Effects Pack (Low Quality)"
+    Author:       GGBotNet
+    License:      CC0
+    License page: https://opengameart.org/content/car-sound-effects-pack-low-quality
+    Download:     https://opengameart.org/sites/default/files/car_engine_loop_1.ogg
+    Attribution (optional): "Car engine loop" by GGBotNet (OpenGameArt.org), CC0
+
+[6] Cars\Engine\racing_engine_loop_0_domasx2.wav
+    Title:        loop_0.wav, from "racing car engine sound loops"
+    Author:       domasx2
+    License:      CC0
+    License page: https://opengameart.org/content/racing-car-engine-sound-loops
+    Download:     https://opengameart.org/sites/default/files/loop_0.wav
+    Attribution (optional): "Racing car engine sound loops" by domasx2 (OpenGameArt.org), CC0
+
+[7] Cars\Horn\car_horn_GGBotNet.ogg
+    Title:        car_horn_0.ogg, from "Car Sound Effects Pack (Low Quality)"
+    Author:       GGBotNet
+    License:      CC0
+    License page: https://opengameart.org/content/car-sound-effects-pack-low-quality
+    Download:     https://opengameart.org/sites/default/files/car_horn_0.ogg
+    Attribution (optional): "Car horn" by GGBotNet (OpenGameArt.org), CC0
+
+[8] Cars\Horn\Car_Horn_15HPanska_Ruttner_Jan.wav
+    Title:        Car Horn
+    Author:       15HPanska_Ruttner_Jan
+    License:      CC0  (Creative Commons CC0 1.0 Universal Public Domain Dedication)
+    License page: https://commons.wikimedia.org/wiki/File:Car_Horn.wav
+    Download:     https://upload.wikimedia.org/wikipedia/commons/8/8c/Car_Horn.wav
+    Attribution (optional): "Car Horn" by 15HPanska_Ruttner_Jan (Wikimedia Commons), CC0
+
+[9] Cars\Siren\Whelen_siren_wail_yelp_Heggyhomolit.ogg
+    Title:        Whelen (emergency siren tones Wail/Yelp)
+    Author:       Heggyhomolit
+    License:      CC0  (Creative Commons CC0 1.0 Universal Public Domain Dedication)
+    License page: https://commons.wikimedia.org/wiki/File:Whelen.ogg
+    Download:     https://upload.wikimedia.org/wikipedia/commons/b/b2/Whelen.ogg
+    Attribution (optional): "Whelen" siren by Heggyhomolit (Wikimedia Commons), CC0
+
+----------------------------------------------------------------------------
+CITY
+----------------------------------------------------------------------------
+
+[10] City\Ambience\high_traffic_road_IgnasD.ogg
+    Title:        High traffic road sounds (file "gatve Varniu.ogg")
+    Author:       IgnasD
+    License:      CC0
+    License page: https://opengameart.org/content/high-traffic-road-sounds
+    Download:     https://opengameart.org/sites/default/files/gatve%20Varniu_2.ogg
+    Attribution (optional): "High traffic road sounds" by IgnasD (OpenGameArt.org), CC0
+
+----------------------------------------------------------------------------
+WEAPONS
+----------------------------------------------------------------------------
+
+[11] Weapons\Gunshot\22_Pistol_kurt.wav
+    Title:        22 Pistol.wav, from "Gunshots"  (several shots in one 2-second file)
+    Author:       kurt
+    License:      CC0
+    License page: https://opengameart.org/content/gunshots
+    Download:     https://opengameart.org/sites/default/files/22%20Pistol.wav
+    Attribution (optional): "Gunshots" by kurt (OpenGameArt.org), CC0
+
+[12] Weapons\Gunshot\gun_fire_AVW.wav
+    Title:        gun_fire.wav, from "A collection of gun sounds"
+    Author:       AVW
+    License:      CC BY 3.0  (https://creativecommons.org/licenses/by/3.0/)
+    License page: https://opengameart.org/content/collection-gun-sounds
+    Download:     https://opengameart.org/sites/default/files/gun_fire.wav
+    Attribution line:
+      "gun_fire.wav" by AVW (https://opengameart.org/content/collection-gun-sounds)
+      Licensed under CC BY 3.0: https://creativecommons.org/licenses/by/3.0/

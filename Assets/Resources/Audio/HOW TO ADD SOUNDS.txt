@@ -1,0 +1,16 @@
+HOW TO ADD YOUR OWN MUSIC AND SOUNDS
+====================================
+The game picks sounds from these folders by itself. To add more, just drag
+.mp3 / .ogg / .wav files into the right folder in Unity. No other setup.
+
+Music/City         calm music while walking around the city (plays one after another)
+Music/BlackMarket  music in the hidden black market under the sewer
+Music/Wanted       chase music when you have 2 or more wanted stars
+Cars/Engine        engine loop for traffic cars (loops)
+Cars/Horn          honks when a car is stuck behind something
+Cars/Siren         police car siren (loops)
+City/Ambience      street noise in the city (loops)
+Weapons/Gunshot    pistol shot (one short shot per file works best)
+
+If you download from a site that needs a login (freesound, pixabay, etc.),
+check the license and write the credit in AUDIO_CREDITS.txt.

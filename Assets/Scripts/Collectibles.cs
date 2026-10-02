@@ -1,3 +1,15 @@
+/*********************************************************************************************
+ * COMPONENT OF: money prefab (Assets/edited object/money.prefab)
+ * REQUIRED DEPENDENCIES: MoneyManager in the scene, Box Collider with Is Trigger on,
+ *                        Player tagged "Player" with a Rigidbody, (optional) money particle
+ *                        prefab and collect sound
+ * DESCRIPTION: Makes the money float up and down and spin. When the Player touches it, it
+ *              adds moneyValue to the MoneyManager, plays particles and a sound, then
+ *              removes itself.
+ * AUTHOR: Ben Xiao
+ * VERSION: 1.0
+ * VERSION 1.1: Add a behavior so that the Collectible rotates slowly about the y-axis.
+ *********************************************************************************************/
 using UnityEngine;
 
 public class MoneyCollectible : MonoBehaviour
@@ -10,6 +22,8 @@ public class MoneyCollectible : MonoBehaviour
     public float floatSpeed = 2f;
 
     [Header("Spinning")]
+    // How fast the money turns, in degrees per second. Set in the Inspector.
+    // 90 = one full turn every 4 seconds. Lower = slower.
     public float spinSpeed = 90f;
 
     [Header("Effects")]
@@ -26,7 +40,14 @@ public class MoneyCollectible : MonoBehaviour
 
     void Update()
     {
-        // Float up and down
+        // Update only calls other methods. Each method has one job.
+        Float();
+        Rotate();
+    }
+
+    // Moves the money up and down in a smooth wave around its starting height
+    private void Float()
+    {
         float newY =
             startPosition.y +
             Mathf.Sin(Time.time * floatSpeed) * floatHeight;
@@ -37,8 +58,14 @@ public class MoneyCollectible : MonoBehaviour
                 newY,
                 transform.position.z
             );
+    }
 
-        // Spin
+    // VERSION 1.1: Turns the money slowly around the y-axis (the up-and-down axis)
+    private void Rotate()
+    {
+        // Vector3.up is the y-axis. spinSpeed * Time.deltaTime is how many degrees to turn
+        // this frame, so the speed stays the same on fast and slow computers.
+        // Space.World spins around the world's y-axis, even if the money model is tilted.
         transform.Rotate(
             Vector3.up,
             spinSpeed * Time.deltaTime,
@@ -57,7 +84,7 @@ public class MoneyCollectible : MonoBehaviour
 
             // Add money
             MoneyManager moneyManager =
-                FindFirstObjectByType<MoneyManager>();
+                FindAnyObjectByType<MoneyManager>();
 
             if (moneyManager != null)
             {

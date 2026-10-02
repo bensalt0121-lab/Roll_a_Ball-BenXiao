@@ -1,0 +1,15 @@
+Low poly models and sounds in this folder are by Kenney (www.kenney.nl).
+License: Creative Commons Zero (CC0) - free to use in any project, no credit required.
+Credit is still given here because it is the right thing to do.
+
+Packs used (downloaded 2026-10-01 from kenney.nl):
+- City Kit (Commercial) 2.1   -> CityCommercial
+- City Kit (Suburban) 2.0     -> CitySuburban
+- City Kit (Roads)            -> CityRoads (props only)
+- Car Kit                     -> Cars
+- Mini Characters             -> Characters (includes walk / idle / sprint / die animations)
+- Food Kit                    -> Food
+- Nature Kit                  -> Nature
+- Furniture Kit               -> Furniture
+- UI Audio                    -> Audio/UI
+- Impact Sounds               -> Audio/Impacts

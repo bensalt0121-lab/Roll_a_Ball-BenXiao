@@ -1,3 +1,13 @@
+/*********************************************************************************************
+ * COMPONENT OF: Maincamera
+ * REQUIRED DEPENDENCIES: Player Transform in the player field, Input System package
+ * DESCRIPTION: Third-person camera that orbits the Player. Moving the mouse turns the camera
+ *              around the ball (up/down is limited by minPitch and maxPitch). The mouse
+ *              cursor is locked and hidden while playing; Esc unlocks it and left click locks
+ *              it again.
+ * AUTHOR: Ben Xiao
+ * VERSION: 1.0
+ *********************************************************************************************/
 using UnityEngine;
 using UnityEngine.InputSystem;
 

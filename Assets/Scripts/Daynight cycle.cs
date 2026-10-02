@@ -1,3 +1,13 @@
+/*********************************************************************************************
+ * COMPONENT OF: Daynight manager
+ * REQUIRED DEPENDENCIES: Directional Light (sun) in the sun field, a Skybox material in the
+ *                        Lighting settings (used for colors)
+ * DESCRIPTION: Runs a 24-hour clock where one full day lasts dayLength seconds. Moves the
+ *              sun across the sky, makes it orange at sunrise (6-8) and sunset (16-18),
+ *              bright during the day, dim at night, and fades the ambient light to match.
+ * AUTHOR: Ben Xiao
+ * VERSION: 1.0
+ *********************************************************************************************/
 using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour

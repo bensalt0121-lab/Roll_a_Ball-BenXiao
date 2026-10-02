@@ -1,3 +1,12 @@
+/*********************************************************************************************
+ * COMPONENT OF: MoneyManager
+ * REQUIRED DEPENDENCIES: TextMeshPro text on the Canvas in moneyText, collectibles that call
+ *                        AddMoney
+ * DESCRIPTION: Keeps the player's money total and shows it on screen as "$amount".
+ *              AddMoney adds to the total. RemoveMoney subtracts but never goes below 0.
+ * AUTHOR: Ben Xiao
+ * VERSION: 1.0
+ *********************************************************************************************/
 using UnityEngine;
 using TMPro;
 

@@ -1,3 +1,13 @@
+/*********************************************************************************************
+ * COMPONENT OF: Player (the ball)
+ * REQUIRED DEPENDENCIES: Rigidbody and Sphere Collider (added automatically), Maincamera
+ *                        Transform in cameraTransform, ground objects on the Ground Layer,
+ *                        Input System package
+ * DESCRIPTION: WASD rolls the ball in the direction the camera is facing. Space makes the
+ *              ball jump, but only when the ground check finds ground under it.
+ * AUTHOR: Ben Xiao
+ * VERSION: 1.0
+ *********************************************************************************************/
 using UnityEngine;
 using UnityEngine.InputSystem;
 
