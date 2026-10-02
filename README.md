@@ -18,10 +18,14 @@ Made by Ben Xiao, with help from Claude (AI coding assistant).
 | Esc | Free the mouse |
 | H | Help screen (controls, goal, map colors). R in the help screen replays the tutorial |
 | T | Skip the tutorial |
+| M | Big map (the game pauses): every place is labeled, plus a note that tells you what to do next |
 | Enter | Next tutorial tip |
 
 A short **tutorial** starts the first time you play: move, jump, buy food, do a job, then the
 goal and the police. A blue beam shows where to go. You start with $40.
+
+Tall glowing beams show where to go: blue = tutorial, green = delivery, yellow = taxi
+passenger, purple = the next house you can buy.
 
 - **Hunger and thirst** go down slowly (about 7-8 minutes). Buy food and drinks at the Burger
   Shop, Drink Bar or Corner Store. If a bar is empty you roll slower.

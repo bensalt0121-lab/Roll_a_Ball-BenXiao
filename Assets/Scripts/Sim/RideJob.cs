@@ -6,7 +6,8 @@
  *              passenger follows you; lead them to the yellow marker to get paid. Roll too
  *              far ahead and you lose them.
  * AUTHOR: Ben Xiao (written with Claude)
- * VERSION: 1.0
+ * VERSION: 1.1
+ * VERSION 1.1: The yellow marker is brighter, very tall and glows (GuideBeam).
  *********************************************************************************************/
 using UnityEngine;
 
@@ -34,6 +35,7 @@ public class RideJob : Job
 
     void Start()
     {
+        GuideBeam.Brighten(marker, new Color(1f, 0.8f, 0.1f), 80f);
         HideMarker();
         if (passenger != null)
             standSpot = passenger.transform.position;

@@ -6,6 +6,7 @@
  * AUTHOR: Ben Xiao (written with Claude)
  * VERSION: 1.1
  * VERSION 1.1: Now uses the shared Job base class so only one job runs at a time.
+ * VERSION 1.2: The green marker is brighter, very tall and glows (GuideBeam).
  *********************************************************************************************/
 using UnityEngine;
 
@@ -30,6 +31,7 @@ public class DeliveryJob : Job
 
     void Start()
     {
+        GuideBeam.Brighten(marker, new Color(0.2f, 1f, 0.35f), 80f);
         HideMarker();
     }
 

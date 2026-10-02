@@ -8,7 +8,8 @@
  *              help screen (H) with the controls, the goal and the map colors.
  *              Keys: Enter = next tip, T = skip tutorial, H = help, R (in help) = replay.
  * AUTHOR: Ben Xiao (written with Claude)
- * VERSION: 1.0
+ * VERSION: 1.1
+ * VERSION 1.1: Teaches the big map (M), brighter guide beam, M in the help screen.
  *********************************************************************************************/
 using System;
 using System.Linq;
@@ -111,6 +112,8 @@ public class TutorialManager : MonoBehaviour
             new Step { title = "Move around", text = "You are a human pretending to be a ball!\nRoll with <b>W A S D</b> and look around with the <b>mouse</b>.",
                        isDone = () => SimUtil.FlatDistance(player.transform.position, stepStartPosition) > 4f },
             new Step { title = "Jump", text = "Press <b>Space</b> to jump.", isDone = () => jumped },
+            new Step { title = "Open the map", text = "Press <b>M</b> to open the big map. It shows every place and tells you <b>what to do next</b>.\nPress <b>M</b> again to close it.",
+                       isDone = () => MapScreen.TimesOpened > 0 && !MapScreen.IsOpen },
             new Step { title = "Find food", text = "Your <b>HUNGER</b> and <b>THIRST</b> bars (bottom left) slowly go down.\nRoll to the <color=#59BFFF>blue beam</color>: the Burger Shop.",
                        target = burgerSpot, isDone = () => burger == null || SimUtil.FlatDistance(player.transform.position, burger.transform.position) < 3f },
             new Step { title = "Buy something", text = "Stand at a counter and press <b>E</b> to buy.\nFood fills hunger, drinks fill thirst.",
@@ -148,7 +151,7 @@ public class TutorialManager : MonoBehaviour
         tutorialPanel.SetActive(!helpPanel.activeSelf);
         titleText.text = "TUTORIAL " + (stepIndex + 1) + "/" + steps.Length + ": " + step.title;
         bodyText.text = step.text;
-        footerText.text = step.isTip ? "Enter = next    T = skip tutorial    H = help" : "T = skip tutorial    H = help";
+        footerText.text = step.isTip ? "Enter = next    T = skip tutorial    H = help    M = map" : "T = skip tutorial    H = help    M = map";
     }
 
     // Moves on when the player has done what the step asks (tips wait for Enter or a few seconds)
@@ -223,44 +226,11 @@ public class TutorialManager : MonoBehaviour
 
     // ---------- The blue beam that shows where to go ----------
 
+    // A very tall, bright blue beam (it also shows on the minimap)
     void BuildGuideBeam()
     {
-        Material glow = MakeGlowMaterial(Blue);
-        guideBeam = new GameObject("Tutorial Guide Beam");
-
-        GameObject beam = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        Destroy(beam.GetComponent<Collider>());
-        beam.transform.SetParent(guideBeam.transform, false);
-        // 80 m tall so it can be seen from anywhere in the city
-        beam.transform.localPosition = new Vector3(0f, 40f, 0f);
-        beam.transform.localScale = new Vector3(0.6f, 40f, 0.6f);
-        beam.GetComponent<Renderer>().sharedMaterial = glow;
-
-        // A big square only the minimap camera sees, so the target also shows on the map
-        int mapLayer = LayerMask.NameToLayer("Minimap");
-        if (mapLayer >= 0)
-        {
-            GameObject icon = GameObject.CreatePrimitive(PrimitiveType.Quad);
-            Destroy(icon.GetComponent<Collider>());
-            icon.transform.SetParent(guideBeam.transform, false);
-            icon.transform.localPosition = new Vector3(0f, 40f, 0f);
-            icon.transform.localRotation = Quaternion.Euler(90f, 45f, 0f);
-            icon.transform.localScale = Vector3.one * 5f;
-            icon.GetComponent<Renderer>().sharedMaterial = glow;
-            icon.layer = mapLayer;
-        }
-
+        guideBeam = GuideBeam.Create("Tutorial Guide Beam", Blue, 80f);
         guideBeam.SetActive(false);
-    }
-
-    static Material MakeGlowMaterial(Color color)
-    {
-        Shader unlit = Shader.Find("Universal Render Pipeline/Unlit");
-        Material material = unlit != null ? new Material(unlit) : new Material(Shader.Find("Sprites/Default"));
-        material.color = color;
-        if (material.HasProperty("_BaseColor"))
-            material.SetColor("_BaseColor", color);
-        return material;
     }
 
     void MoveGuideBeam()
@@ -312,12 +282,12 @@ public class TutorialManager : MonoBehaviour
         hint.anchorMin = hint.anchorMax = hint.pivot = Vector2.zero;
         hint.anchoredPosition = new Vector2(34f, 146f);
         hint.sizeDelta = new Vector2(400f, 30f);
-        Text(hint, 18f, new Color(1f, 1f, 1f, 0.8f), true).text = "H = Help    F1 = Graphics";
+        Text(hint, 18f, new Color(1f, 1f, 1f, 0.8f), true).text = "H = Help    M = Map    F1 = Graphics";
     }
 
     const string HelpText =
         "<color=#FFD54A><b>CONTROLS</b></color>\n" +
-        "W A S D = roll    Mouse = look    Space = jump    E = use / buy / start a job\n" +
+        "W A S D = roll    Mouse = look    Space = jump    E = use / buy / start a job    M = big map\n" +
         "Left click = shoot (after buying a pistol)    Esc = free the mouse    F1 = graphics    F3 = FPS\n\n" +
         "<color=#FFD54A><b>GOAL</b></color>\n" +
         "Earn money with jobs and keep your hunger and thirst up. Save $300 for the House on Oak Street,\n" +
