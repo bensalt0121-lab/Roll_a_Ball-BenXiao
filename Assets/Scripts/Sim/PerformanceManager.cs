@@ -38,15 +38,19 @@ public class PerformanceManager : MonoBehaviour
         public int maxStreetLights = 16;
         // How many times per second the minimap is redrawn
         public float minimapFps = 20f;
+        // Part of the people and traffic cars that are kept (0.5 = half of them)
+        [Range(0.1f, 1f)] public float crowdAmount = 1f;
+        // Screen effects like bloom and vignette
+        public bool postEffects = true;
     }
 
     // Lets other scripts read the current settings, for example PerformanceManager.Current
     public static PresetSettings Current { get; private set; } = new PresetSettings();
 
     [Header("Presets")]
-    public PresetSettings low = new PresetSettings { qualityLevel = "Mobile", renderScale = 0.7f, shadowDistance = 25f, viewDistance = 150f, detailDistance = 45f, maxStreetLights = 4, minimapFps = 5f };
-    public PresetSettings medium = new PresetSettings { qualityLevel = "PC", renderScale = 0.85f, shadowDistance = 35f, viewDistance = 250f, detailDistance = 75f, maxStreetLights = 8, minimapFps = 10f };
-    public PresetSettings high = new PresetSettings { qualityLevel = "PC", renderScale = 1f, shadowDistance = 50f, viewDistance = 500f, detailDistance = 140f, maxStreetLights = 16, minimapFps = 20f };
+    public PresetSettings low = new PresetSettings { qualityLevel = "Mobile", renderScale = 0.7f, shadowDistance = 25f, viewDistance = 150f, detailDistance = 45f, maxStreetLights = 4, minimapFps = 5f, crowdAmount = 0.5f, postEffects = false };
+    public PresetSettings medium = new PresetSettings { qualityLevel = "PC", renderScale = 0.85f, shadowDistance = 35f, viewDistance = 250f, detailDistance = 75f, maxStreetLights = 8, minimapFps = 10f, crowdAmount = 0.8f, postEffects = true };
+    public PresetSettings high = new PresetSettings { qualityLevel = "PC", renderScale = 1f, shadowDistance = 50f, viewDistance = 500f, detailDistance = 140f, maxStreetLights = 12, minimapFps = 20f, crowdAmount = 1f, postEffects = true };
 
     [Header("Other")]
     // Caps the frame rate so laptops do not overheat
@@ -64,6 +68,8 @@ public class PerformanceManager : MonoBehaviour
     private int originalQualityLevel;
     private float fpsTimer;
     private int fpsFrames;
+    private GameObject[] people;
+    private GameObject[] cars;
 
     void Awake()
     {
@@ -92,6 +98,8 @@ public class PerformanceManager : MonoBehaviour
         SetQualityLevel(Current.qualityLevel);
         SetPipelineSettings();
         SetCameraDistances();
+        SetPostEffects();
+        SetCrowdSize();
         PlayerPrefs.SetInt(SaveKey, (int)preset);
     }
 
@@ -177,6 +185,45 @@ public class PerformanceManager : MonoBehaviour
             distances[details] = Current.detailDistance;
             mainCamera.layerCullDistances = distances;
             mainCamera.layerCullSpherical = true;
+        }
+    }
+
+    // Bloom, vignette and other screen effects are turned off on Low
+    void SetPostEffects()
+    {
+        foreach (Volume volume in FindObjectsByType<Volume>(FindObjectsInactive.Include))
+            volume.enabled = Current.postEffects;
+    }
+
+    // Keeps only part of the people and traffic cars on slow computers
+    void SetCrowdSize()
+    {
+        if (people == null)
+        {
+            people = FindAll<NpcWalker>();
+            cars = FindAll<TrafficCar>();
+        }
+
+        KeepPart(people, Current.crowdAmount);
+        KeepPart(cars, Current.crowdAmount);
+    }
+
+    GameObject[] FindAll<T>() where T : Component
+    {
+        T[] found = FindObjectsByType<T>(FindObjectsInactive.Include);
+        GameObject[] objects = new GameObject[found.Length];
+        for (int i = 0; i < found.Length; i++)
+            objects[i] = found[i].gameObject;
+        return objects;
+    }
+
+    void KeepPart(GameObject[] objects, float amount)
+    {
+        int keep = Mathf.CeilToInt(objects.Length * amount);
+        for (int i = 0; i < objects.Length; i++)
+        {
+            if (objects[i] != null)
+                objects[i].SetActive(i < keep);
         }
     }
 

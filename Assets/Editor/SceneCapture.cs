@@ -76,6 +76,7 @@ namespace IAmABall.EditorTools
                 Shot(folder, "05_street_level", new Vector3(c.x, 1.7f, city.min.z - 2f), new Vector3(c.x, 1.5f, c.z), false, 0f, 1600, 900, Vector3.up);
             }
 
+            NightShots(folder, c, city);
             Debug.Log("[I Am A Ball] Screenshots saved to " + folder);
         }
 
@@ -86,6 +87,50 @@ namespace IAmABall.EditorTools
                 return hit.point - offset.normalized * 0.4f;
 
             return focus + offset;
+        }
+
+        // Pictures at 10 PM with the street light glow and the closest real lights on
+        static void NightShots(string folder, Vector3 c, Bounds city)
+        {
+            DayNightCycle cycle = UnityEngine.Object.FindAnyObjectByType<DayNightCycle>();
+            GameObject gameplay = GameObject.Find(GameplayBuilder.RootName);
+            Transform glow = gameplay != null ? gameplay.transform.Find(CityLightingSetup.GlowName) : null;
+            if (cycle == null)
+                return;
+
+            float oldTime = cycle.timeOfDay;
+            cycle.ApplyTime(22f);
+            if (glow != null)
+                glow.gameObject.SetActive(true);
+
+            Vector3 eye = new Vector3(c.x, 1.8f, city.min.z + 8f);
+            Light[] lights = UnityEngine.Object.FindObjectsByType<Light>(FindObjectsInactive.Include);
+            System.Array.Sort(lights, (a, b) => (a.transform.position - eye).sqrMagnitude.CompareTo((b.transform.position - eye).sqrMagnitude));
+            int turnedOn = 0;
+            foreach (Light light in lights)
+            {
+                if (turnedOn < 12 && light.type != LightType.Directional && !light.enabled)
+                {
+                    light.enabled = true;
+                    turnedOn++;
+                }
+            }
+
+            Shot(folder, "30_night_street", eye, new Vector3(c.x, 1.5f, c.z), false, 0f, 1600, 900, Vector3.up);
+            Shot(folder, "31_night_overview", new Vector3(city.max.x + 30f, 45f, city.min.z - 30f), c, false, 0f, 1600, 900, Vector3.up);
+
+            turnedOn = 0;
+            foreach (Light light in lights)
+            {
+                if (turnedOn < 12 && light.type != LightType.Directional && light.enabled)
+                {
+                    light.enabled = false;
+                    turnedOn++;
+                }
+            }
+            if (glow != null)
+                glow.gameObject.SetActive(false);
+            cycle.ApplyTime(oldTime);
         }
 
         static Bounds CityBounds()

@@ -7,6 +7,8 @@
  *              bright during the day, dim at night, and fades the ambient light to match.
  * AUTHOR: Ben Xiao
  * VERSION: 1.0
+ * VERSION 1.1: Starts in the morning, nights go by faster, soft blue moonlight at night so
+ *              the city is not pitch black, and the Scene view previews the chosen time.
  *********************************************************************************************/
 using UnityEngine;
 
@@ -14,7 +16,7 @@ public class DayNightCycle : MonoBehaviour
 {
     [Header("Time")]
     [Range(0f, 24f)]
-    public float timeOfDay = 8f;
+    public float timeOfDay = 9f;
 
     [Tooltip("How many real seconds one full day takes.")]
     public float dayLength = 300f;
@@ -30,16 +32,59 @@ public class DayNightCycle : MonoBehaviour
 
     [Header("Ambient Light")]
     public float dayAmbientIntensity = 1f;
-    public float nightAmbientIntensity = 0.15f;
+    public float nightAmbientIntensity = 0.45f;
+
+    [Header("Night")]
+    [Tooltip("Nights go by this many times faster than days.")]
+    public float nightSpeedMultiplier = 3f;
+    // Soft blue light from the moon so the city is still visible at night
+    public float moonIntensity = 0.35f;
+    public Color moonColor = new Color(0.55f, 0.65f, 1f);
+
+    // A copy of the sky material so it can get darker at night without changing the asset
+    private Material skyCopy;
+    private float skyBrightness = 1f;
+
+    // True between 6 PM and 6 AM
+    public bool IsNight => timeOfDay >= 18f || timeOfDay < 6f;
 
     void Start()
     {
         DetectSkyboxColor();
+        CopySkybox();
+    }
+
+    // Uses a copy of the sky so changing its brightness never changes the project file
+    void CopySkybox()
+    {
+        Material sky = RenderSettings.skybox;
+        if (sky == null || !sky.HasProperty("_Exposure"))
+            return;
+
+        skyCopy = new Material(sky);
+        skyBrightness = skyCopy.GetFloat("_Exposure");
+        RenderSettings.skybox = skyCopy;
     }
 
     void Update()
     {
         UpdateTime();
+        UpdateSun();
+        UpdateLighting();
+    }
+
+    // Changing the time in the Inspector updates the sun in the Scene view right away
+    void OnValidate()
+    {
+        if (!Application.isPlaying)
+            ApplyTime(timeOfDay);
+    }
+
+    // Jumps the clock to an hour and updates the sun and light right away (used by tools and sleeping)
+    public void ApplyTime(float hour)
+    {
+        timeOfDay = Mathf.Repeat(hour, 24f);
+        DetectSkyboxColor();
         UpdateSun();
         UpdateLighting();
     }
@@ -78,7 +123,8 @@ public class DayNightCycle : MonoBehaviour
 
     void UpdateTime()
     {
-        timeOfDay += (24f / dayLength) * Time.deltaTime;
+        float speed = IsNight ? nightSpeedMultiplier : 1f;
+        timeOfDay += (24f / dayLength) * speed * Time.deltaTime;
 
         if (timeOfDay >= 24f)
         {
@@ -102,6 +148,13 @@ public class DayNightCycle : MonoBehaviour
                 (timeOfDay - 6f) / 24f *
                 Mathf.PI * 2f
             );
+
+        // Below the horizon: the same light becomes the moon
+        if (sunHeight <= 0f)
+        {
+            ShowMoon(sunRotation, -sunHeight);
+            return;
+        }
 
         sunHeight = Mathf.Clamp01(sunHeight);
 
@@ -168,6 +221,14 @@ public class DayNightCycle : MonoBehaviour
         }
     }
 
+    // Turns the light around so it shines from above, dim and blue like the moon
+    void ShowMoon(float sunRotation, float moonHeight)
+    {
+        sun.transform.rotation = Quaternion.Euler(sunRotation - 180f, 170f, 0f);
+        sun.intensity = moonIntensity * Mathf.Clamp01(moonHeight * 3f);
+        sun.color = moonColor;
+    }
+
     void UpdateLighting()
     {
         float daylight =
@@ -184,6 +245,10 @@ public class DayNightCycle : MonoBehaviour
                 dayAmbientIntensity,
                 daylight
             );
+
+        // The sky gets darker at night (only while playing, using the copy)
+        if (skyCopy != null)
+            skyCopy.SetFloat("_Exposure", Mathf.Lerp(skyBrightness * 0.15f, skyBrightness, daylight));
 
         // Also tint the ambient light toward the skybox
         RenderSettings.ambientLight =

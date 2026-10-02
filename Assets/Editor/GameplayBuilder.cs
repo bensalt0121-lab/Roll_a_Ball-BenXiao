@@ -84,6 +84,7 @@ namespace IAmABall.EditorTools
             BuildNavMesh(root);
             BuildHud(root, out RawImage minimapImage, out TMP_Text fpsText);
             systems.GetComponent<PerformanceManager>().fpsText = fpsText;
+            systems.GetComponent<StreetLightManager>().nightGlow = CityLightingSetup.BuildStreetLightGlow(root);
             BuildMinimap(root, player, minimapImage);
 
             RuntimeAnimatorController controller = BuildAnimatorController();

@@ -4,9 +4,11 @@
  *                        PerformanceManager (for how many lights may glow)
  * DESCRIPTION: The city has about 144 street lights, and every glowing light costs speed.
  *              This turns all of them off during the day, and at night only turns on the
- *              ones closest to the camera.
+ *              ones closest to the camera. Every lamp also has a cheap glowing bulb and a
+ *              pool of light on the ground (not a real light) that shows at night.
  * AUTHOR: Ben Xiao (written with Claude)
- * VERSION: 1.0
+ * VERSION: 1.1
+ * VERSION 1.1: Glowing bulbs and light pools at night (nightGlow).
  *********************************************************************************************/
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +20,8 @@ public class StreetLightManager : MonoBehaviour
     public float lightsOffAt = 6.5f;
     // Seconds between checks (checking every frame is not needed)
     public float checkEvery = 0.5f;
+    // Glowing bulbs and light pools under every lamp (shown only at night)
+    public GameObject nightGlow;
 
     private readonly List<Light> streetLights = new List<Light>();
     private DayNightCycle clock;
@@ -42,7 +46,7 @@ public class StreetLightManager : MonoBehaviour
     // Street lights are the lights that belong to a "road light" model
     void FindStreetLights()
     {
-        foreach (Light light in FindObjectsByType<Light>())
+        foreach (Light light in FindObjectsByType<Light>(FindObjectsInactive.Include))
         {
             if (light.type != LightType.Directional && IsPartOfRoadLight(light.transform))
                 streetLights.Add(light);
@@ -62,7 +66,7 @@ public class StreetLightManager : MonoBehaviour
     bool IsNight()
     {
         if (clock == null)
-            return true;
+            return false;
 
         return clock.timeOfDay >= lightsOnAt || clock.timeOfDay < lightsOffAt;
     }
@@ -73,7 +77,11 @@ public class StreetLightManager : MonoBehaviour
         if (viewCamera == null)
             viewCamera = Camera.main;
 
-        int allowed = IsNight() ? PerformanceManager.Current.maxStreetLights : 0;
+        bool night = IsNight();
+        if (nightGlow != null && nightGlow.activeSelf != night)
+            nightGlow.SetActive(night);
+
+        int allowed = night ? PerformanceManager.Current.maxStreetLights : 0;
         Vector3 eye = viewCamera != null ? viewCamera.transform.position : Vector3.zero;
 
         if (allowed > 0)

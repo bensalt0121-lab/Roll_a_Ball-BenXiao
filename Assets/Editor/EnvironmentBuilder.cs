@@ -43,7 +43,10 @@ namespace IAmABall.EditorTools
         const float FencePostGap = 4f;
 
         // Top of the new grass, and top of the big brown "Grounf" cube outside the walls
-        const float GrassTop = 0f;
+        // Grass surface height (sidewalks are at 0, so grass starts exactly where they end)
+        const float GrassTop = 0.001f;
+        // West of the city the user's own ground pieces cover most of it; grass goes just under them
+        const float WestGrassTop = -0.03f;
         const float OutsideGroundY = -0.05f;
         // Extra room around the 8 blocks for the outer road and sidewalk
         const float CityRoadMargin = 4.4f;
@@ -280,16 +283,35 @@ namespace IAmABall.EditorTools
             Material grass = BuildTools.GetMaterial("Outside Grass", GrassColor, false);
             float west = WestX;
             float east = EastX;
-            float nearNorth = cityMaxZ + 0.5f;
-            float nearSouth = cityMinZ - 0.5f;
+            // Find exactly where the city's outer sidewalk ends on each side
+            float midX = (cityMinX + cityMaxX) * 0.5f;
+            float midZ = (cityMinZ + cityMaxZ) * 0.5f;
+            float nearNorth = PavementEnd(new Vector3(midX, 0f, cityMaxZ - CityRoadMargin), Vector3.forward).z;
+            float nearSouth = PavementEnd(new Vector3(midX, 0f, cityMinZ + CityRoadMargin), Vector3.back).z;
+            float nearEast = PavementEnd(new Vector3(cityMaxX - CityRoadMargin, 0f, midZ), Vector3.right).x;
 
             GrassPatch(group, grass, "Grass North", west, east, nearNorth, NorthZ);
             GrassPatch(group, grass, "Grass South", west, east, SouthZ, nearSouth);
-            GrassPatch(group, grass, "Grass East", cityMaxX + 0.5f, east, nearSouth, nearNorth);
+            GrassPatch(group, grass, "Grass East", nearEast, east, nearSouth, nearNorth);
 
             // West of the city (around the park and tunnel roads): a little lower than the
-            // sidewalks there, so it only shows where the ground was bare brown
-            GrassPatch(group, grass, "Grass West", west, cityMinX - 0.5f, nearSouth, nearNorth, -0.03f);
+            // ground pieces there, so it only shows where the ground was bare brown
+            GrassPatch(group, grass, "Grass West", west, cityMinX + 2.5f, nearSouth, nearNorth, WestGrassTop);
+        }
+
+        // Walks outward from a block edge until the ground drops below the sidewalk height
+        static Vector3 PavementEnd(Vector3 blockEdge, Vector3 outward)
+        {
+            int groundMask = 1 << groundLayer;
+            for (float distance = 0f; distance < 15f; distance += 0.1f)
+            {
+                Vector3 p = blockEdge + outward * distance;
+                bool onPavement = Physics.Raycast(new Vector3(p.x, 5f, p.z), Vector3.down, out RaycastHit hit, 10f, groundMask, QueryTriggerInteraction.Ignore)
+                    && hit.point.y > -0.006f;
+                if (!onPavement)
+                    return p;
+            }
+            return blockEdge + outward * CityRoadMargin;
         }
 
         // A 0.1 m thick box whose top is at 'top' (GrassTop by default); the player can jump on it

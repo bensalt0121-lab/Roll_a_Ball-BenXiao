@@ -8,7 +8,8 @@
  *                  buildings, and skips drawing them while playing
  *                - Shrink Big Textures: 4K textures become 1K (looks almost the same in a
  *                  low poly game, uses much less graphics memory)
- *                - Street light shadows off (see LightingFixer)
+ *                - Street light shadows off (see LightingFixer), static objects, cheaper
+ *                  shadows and ambient occlusion, morning start (see CityLightingSetup)
  * AUTHOR: Ben Xiao (written with Claude)
  * VERSION: 1.0
  *********************************************************************************************/
@@ -44,6 +45,9 @@ namespace IAmABall.EditorTools
         public static void OptimizeAll()
         {
             LightingFixer.TurnOffSmallLightShadows();
+            CityLightingSetup.SetUpDayNight();
+            CityLightingSetup.TuneRenderSettings();
+            CityLightingSetup.MarkSceneStatic();
             ShrinkBigTextures();
             BakeNavMesh();
             BakeOcclusion();
