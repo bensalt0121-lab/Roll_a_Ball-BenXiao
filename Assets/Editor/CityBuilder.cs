@@ -647,8 +647,9 @@ namespace IAmABall.EditorTools
             Material glow = BuildTools.GetMaterial(name, color, true);
 
             GameObject beam = BuildTools.Primitive(PrimitiveType.Cylinder, "Beam", marker.transform, glow, false);
-            beam.transform.localPosition = new Vector3(0f, 6f, 0f);
-            beam.transform.localScale = new Vector3(0.35f, 6f, 0.35f);
+            // 80 m tall so it can be seen from anywhere in the city
+            beam.transform.localPosition = new Vector3(0f, 40f, 0f);
+            beam.transform.localScale = new Vector3(0.6f, 40f, 0.6f);
 
             GameObject ring = BuildTools.Primitive(PrimitiveType.Cylinder, "Ring", marker.transform, glow, false);
             ring.transform.localPosition = new Vector3(0f, 0.05f, 0f);

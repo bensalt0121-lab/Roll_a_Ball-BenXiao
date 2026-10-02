@@ -231,8 +231,9 @@ public class TutorialManager : MonoBehaviour
         GameObject beam = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         Destroy(beam.GetComponent<Collider>());
         beam.transform.SetParent(guideBeam.transform, false);
-        beam.transform.localPosition = new Vector3(0f, 6f, 0f);
-        beam.transform.localScale = new Vector3(0.4f, 6f, 0.4f);
+        // 80 m tall so it can be seen from anywhere in the city
+        beam.transform.localPosition = new Vector3(0f, 40f, 0f);
+        beam.transform.localScale = new Vector3(0.6f, 40f, 0.6f);
         beam.GetComponent<Renderer>().sharedMaterial = glow;
 
         // A big square only the minimap camera sees, so the target also shows on the map
