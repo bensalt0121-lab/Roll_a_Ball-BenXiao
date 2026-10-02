@@ -41,6 +41,7 @@ namespace IAmABall.EditorTools
             ModelAutoSetup.MakeAllPrefabs(false);
             CityBuilder.Build();
             GameplayBuilder.Build();
+            LightingFixer.TurnOffSmallLightShadows();
         }
 
         // ---------- Command line (used for testing without opening the editor window) ----------
