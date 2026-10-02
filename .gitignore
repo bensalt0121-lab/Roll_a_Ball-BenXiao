@@ -76,3 +76,6 @@ crashlytics-build.properties
 
 # Pictures made by Tools > I Am A Ball > Take Screenshots / Run Test Simulation
 /[Ss]creenshots/
+
+# Old Unity Version Control folder (this project uses GitHub)
+/.plastic/
