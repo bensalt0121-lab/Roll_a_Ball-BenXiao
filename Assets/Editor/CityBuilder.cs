@@ -67,6 +67,8 @@ namespace IAmABall.EditorTools
         static List<Vector3> lampSpots;
         static List<Job> jobsNeedingDropOffs;
         static int groundLayer;
+        // Trees, benches, bins and parked cars stop drawing when far away (see PerformanceManager)
+        static int detailsLayer;
 
         [MenuItem(BuildTools.MenuRoot + "2. Build City Details", priority = 2)]
         static void BuildMenu()
@@ -90,6 +92,7 @@ namespace IAmABall.EditorTools
             lampSpots = FindLampSpots();
             jobsNeedingDropOffs = new List<Job>();
             groundLayer = Mathf.Max(0, LayerMask.NameToLayer("Ground"));
+            detailsLayer = BuildTools.EnsureLayer("Details");
 
             List<Block> blocks = FindBlocks();
             foreach (Block block in blocks)
@@ -516,6 +519,7 @@ namespace IAmABall.EditorTools
             GameObject go = BuildTools.Spawn(prefab, group);
             float ground = BuildTools.GroundHeight(position, position.y);
             BuildTools.FitSize(go, new Vector3(position.x, ground, position.z), yaw, size, useHeight);
+            BuildTools.SetLayer(go, detailsLayer);
             return go;
         }
 
@@ -530,6 +534,7 @@ namespace IAmABall.EditorTools
             float ground = BuildTools.GroundHeight(position, position.y);
             Vector3 size = Quaternion.Euler(0f, yaw, 0f) * new Vector3(1.6f, 0f, 0.7f);
             BuildTools.FitInside(bench, new Vector3(position.x, ground, position.z), yaw, Mathf.Max(0.7f, Mathf.Abs(size.x)), Mathf.Max(0.7f, Mathf.Abs(size.z)), 1.0f);
+            BuildTools.SetLayer(bench, detailsLayer);
         }
 
         // ---------- Interactables, signs and markers ----------
@@ -604,6 +609,7 @@ namespace IAmABall.EditorTools
             foreach (Collider c in item.GetComponentsInChildren<Collider>())
                 Object.DestroyImmediate(c);
             item.AddComponent<FloatAndSpin>().floatHeight = 0.08f;
+            BuildTools.SetLayer(item, detailsLayer);
         }
 
         // A board on a post (job boards)
