@@ -58,6 +58,8 @@ namespace IAmABall.EditorTools
 
         static System.Random random;
         static int minimapLayer;
+        // Small things (people, cars, cash) go on this layer so they stop drawing far away
+        static int detailsLayer;
 
         [MenuItem(BuildTools.MenuRoot + "3. Set Up Gameplay", priority = 3)]
         static void BuildMenu()
@@ -72,14 +74,16 @@ namespace IAmABall.EditorTools
             random = new System.Random(7);
             Transform root = new GameObject(RootName).transform;
             minimapLayer = BuildTools.EnsureLayer("Minimap");
+            detailsLayer = BuildTools.EnsureLayer("Details");
 
             GameObject player = GameObject.FindWithTag("Player");
             if (player != null)
                 SetUpPlayer(player, root);
 
-            BuildSystems(root);
+            GameObject systems = BuildSystems(root);
             BuildNavMesh(root);
-            BuildHud(root, out RawImage minimapImage);
+            BuildHud(root, out RawImage minimapImage, out TMP_Text fpsText);
+            systems.GetComponent<PerformanceManager>().fpsText = fpsText;
             BuildMinimap(root, player, minimapImage);
 
             RuntimeAnimatorController controller = BuildAnimatorController();
@@ -191,7 +195,7 @@ namespace IAmABall.EditorTools
             gun.SetActive(false);
         }
 
-        static void BuildSystems(Transform root)
+        static GameObject BuildSystems(Transform root)
         {
             GameObject systems = new GameObject("Game Systems");
             systems.transform.SetParent(root, false);
@@ -213,6 +217,11 @@ namespace IAmABall.EditorTools
                 source.playOnAwake = false;
                 source.spatialBlend = 0f;
             }
+
+            // Speed settings (F1 / F3) and street lights that only glow near you at night
+            systems.AddComponent<PerformanceManager>();
+            systems.AddComponent<StreetLightManager>();
+            return systems;
         }
 
         static Transform Point(string name, Transform parent, Vector3 position)
@@ -238,7 +247,7 @@ namespace IAmABall.EditorTools
 
         // ---------- HUD ----------
 
-        static GameHUD BuildHud(Transform root, out RawImage minimapImage)
+        static GameHUD BuildHud(Transform root, out RawImage minimapImage, out TMP_Text fpsText)
         {
             GameObject canvasGo = new GameObject("Sim HUD", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
             canvasGo.transform.SetParent(root, false);
@@ -295,6 +304,11 @@ namespace IAmABall.EditorTools
             AddImage(NewRect("Line Up", crosshair, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(3, 26)), Color.white);
             hud.crosshair = crosshair.gameObject;
             crosshair.gameObject.SetActive(false);
+
+            // Frames per second, top left (F3 shows / hides it)
+            RectTransform fps = NewRect("FPS", c, new Vector2(0, 1), new Vector2(0, 1), new Vector2(20, -20), new Vector2(360, 40));
+            fpsText = AddText(fps, "", 24f, TextAlignmentOptions.Left, new Color(0.7f, 1f, 0.7f), true, outline);
+            fps.gameObject.SetActive(false);
 
             // Minimap, bottom right
             RectTransform frame = NewRect("Minimap", c, new Vector2(1, 0), new Vector2(1, 0), new Vector2(-30, 30), new Vector2(300, 300));
@@ -400,7 +414,8 @@ namespace IAmABall.EditorTools
             cam.orthographic = true;
             cam.clearFlags = CameraClearFlags.SolidColor;
             cam.backgroundColor = new Color(0.25f, 0.3f, 0.25f);
-            cam.cullingMask = ~(1 << LayerMask.NameToLayer("UI"));
+            // The map only needs roads, ground and buildings (not people, cars or trees)
+            cam.cullingMask = ~((1 << LayerMask.NameToLayer("UI")) | (1 << detailsLayer));
             cam.depth = -10f;
             cam.farClipPlane = 200f;
             cam.GetUniversalAdditionalCameraData().renderShadows = false;
@@ -630,6 +645,7 @@ namespace IAmABall.EditorTools
                 police.sirenSound = Speaker(car, 25f, 0.6f);
 
                 IgnoreForNavMesh(car);
+                BuildTools.SetLayer(car, detailsLayer);
             }
         }
 
@@ -792,6 +808,7 @@ namespace IAmABall.EditorTools
             }
 
             IgnoreForNavMesh(person);
+            BuildTools.SetLayer(person, detailsLayer);
             return person;
         }
 
@@ -927,6 +944,7 @@ namespace IAmABall.EditorTools
                 traffic.engineSound = Speaker(car, 18f, 0.35f);
 
                 IgnoreForNavMesh(car);
+                BuildTools.SetLayer(car, detailsLayer);
             }
         }
 
@@ -945,6 +963,7 @@ namespace IAmABall.EditorTools
                 Transform spot = walkPoints[(i * 7 + 3) % walkPoints.Length];
                 GameObject pickup = BuildTools.Spawn(cash, group);
                 pickup.transform.position = spot.position + new Vector3(0.8f, 0.6f, 0.8f);
+                BuildTools.SetLayer(pickup, detailsLayer);
             }
         }
 

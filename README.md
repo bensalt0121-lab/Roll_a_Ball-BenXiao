@@ -37,6 +37,24 @@ Made by Ben Xiao, with help from Claude (AI coding assistant).
   homes (yellow/purple), the police station (blue) and the hospital (red).
 - **Music** changes with what is happening: city, black market, and police chase.
 
+## If the game is slow (school laptop)
+
+| Key | What it does |
+| --- | --- |
+| F1 | Change graphics: Low / Medium / High (remembered next time) |
+| F3 | Show / hide the FPS counter |
+
+The first time the game starts it picks a setting for the computer (built-in Intel/AMD
+graphics get Low). Low makes the picture a bit softer, draws less far (with fog), hides small
+things (trees, people, cars) when they are far away, and lets fewer street lights glow.
+Street lights only turn on at night and only near you. The minimap redraws a few times per
+second instead of every frame.
+
+In the editor, **Tools > I Am A Ball > Optimize For Slow Laptops** turns off street light
+shadows, shrinks 4K textures to 1K, bakes the NavMesh (faster start) and bakes occlusion
+culling (things hidden behind buildings are not drawn). Build Everything does this too.
+Save the scene afterwards.
+
 ## Adding music and sounds
 
 Drop .mp3/.ogg/.wav files into the folders in `Assets/Resources/Audio` (Music/City,
