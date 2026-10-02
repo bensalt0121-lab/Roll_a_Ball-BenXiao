@@ -33,6 +33,7 @@ namespace IAmABall.EditorTools
         {
             BuildTools.DeleteRoot(CityBuilder.RootName);
             BuildTools.DeleteRoot(GameplayBuilder.RootName);
+            BuildTools.DeleteRoot(EnvironmentBuilder.RootName);
             BuildTools.MarkSceneDirty();
         }
 
@@ -41,6 +42,7 @@ namespace IAmABall.EditorTools
             ModelAutoSetup.MakeAllPrefabs(false);
             CityBuilder.Build();
             GameplayBuilder.Build();
+            EnvironmentBuilder.Build();
             // Speed: light shadows off, smaller textures, NavMesh and occlusion culling baked
             PerformanceBaker.OptimizeAll();
         }

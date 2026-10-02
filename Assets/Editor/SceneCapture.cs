@@ -60,6 +60,18 @@ namespace IAmABall.EditorTools
                     }
                 }
 
+                // The area outside the city (lake, forest, sports field, boundary)
+                if (GameObject.Find(EnvironmentBuilder.RootName) != null)
+                {
+                    Bounds play = EnvironmentBuilder.PlayArea;
+                    Shot(folder, "06_outside_top_down", play.center + Vector3.up * 80f, play.center, true, Mathf.Max(play.size.x, play.size.z) * 0.55f, 1600, 1600, Vector3.forward);
+                    Shot(folder, "07_lake", new Vector3(52f, 9f, -22f), new Vector3(72f, 0f, 0f), false, 0f, 1600, 900, Vector3.up);
+                    Shot(folder, "08_forest_path", new Vector3(12.7f, 2.5f, 58f), new Vector3(12.7f, 1.5f, 85f), false, 0f, 1600, 900, Vector3.up);
+                    Shot(folder, "09_sports_field", new Vector3(12f, 12f, -52f), new Vector3(12f, 0f, -76f), false, 0f, 1600, 900, Vector3.up);
+                    Shot(folder, "09b_tunnels_closed", new Vector3(-26f, 3f, 6f), new Vector3(-37f, 1f, 0f), false, 0f, 1600, 900, Vector3.up);
+                    Shot(folder, "09c_east_fence", new Vector3(88f, 4f, 30f), new Vector3(100f, 1f, 30f), false, 0f, 1600, 900, Vector3.up);
+                }
+
                 // Street level, looking down the middle road
                 Shot(folder, "05_street_level", new Vector3(c.x, 1.7f, city.min.z - 2f), new Vector3(c.x, 1.5f, c.z), false, 0f, 1600, 900, Vector3.up);
             }
